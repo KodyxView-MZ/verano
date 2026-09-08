@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Kit 2 em 1 – Massageador com Pomada para Dores</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        * { font-family: 'Poppins', sans-serif; }
+        /* animação de pulso sutil para botão principal */
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .pulse-btn {
+            animation: pulse-soft 2s infinite ease-in-out;
+        }
+        /* Estilo personalizado para o fundo com gradiente e estrelas */
+        .bg-stars {
+            background: radial-gradient(circle at 20% 30%, #1e293b, #0f172a);
+        }
+        /* Overlay para simular carrossel de imagens */
+        .carousel-dot {
+            transition: all 0.2s ease;
+        }
+        /* estrelas piscando */
+        .twinkle {
+            animation: twinkle 3s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        /* animação de brilho no sensor */
+        .sensor-wave {
+            animation: wave-pulse 2s infinite ease-in-out;
+        }
+        @keyframes wave-pulse {
+            0% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.3; transform: scale(0.9); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 selection:bg-amber-200 selection:text-amber-900">
+
+    <!-- BANNER DE URGÊNCIA TOPO (estilo “oferta válida hoje apenas”) -->
+    <div class="bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-400 text-black text-center py-2.5 px-4 text-xs md:text-sm font-bold flex items-center justify-center gap-2 shadow-md border-b-2 border-amber-600">
+        <i data-lucide="clock" class="w-4 h-4 inline animate-pulse"></i>
+        <span>⚡ OFERTA RELÂMPAGO: 40% DESCONTO + PORTES GRÁTIS HOJE! ⚡</span>
+    </div>
+
+    <!-- CONTAINER PRINCIPAL (max-width mobile, estilo card) -->
+    <main class="max-w-md mx-auto bg-white min-h-screen shadow-2xl pb-28 relative">
+
+        <!-- ===== GALERIA / IMAGEM DO PRODUTO ===== -->
+        <div class="relative bg-gray-900 aspect-[4/3] w-full overflow-hidden">
+            <!-- Ilustração vetorial da Lâmpada Solar com Sensor (estilo moderno) -->
+            <svg viewBox="0 0 400 300" class="w-full h-full bg-stars">
+                <!-- Fundo noturno com estrelas -->
+                <circle cx="40" cy="40" r="1.5" fill="white" opacity="0.9" class="twinkle" />
+                <circle cx="120" cy="25" r="2" fill="white" opacity="0.7" class="twinkle" style="animation-delay: 0.5s;" />
+                <circle cx="300" cy="45" r="1.8" fill="white" opacity="0.8" class="twinkle" style="animation-delay: 1s;" />
+                <circle cx="360" cy="80" r="1.2" fill="white" opacity="0.6" class="twinkle" style="animation-delay: 1.5s;" />
+                <circle cx="80" cy="110" r="1" fill="white" opacity="0.5" class="twinkle" style="animation-delay: 0.8s;" />
+                <circle cx="320" cy="20" r="1.5" fill="white" opacity="0.9" class="twinkle" style="animation-delay: 0.3s;" />
+                
+                <!-- Lua crescente -->
+                <path d="M 50 65 Q 70 45 80 65 Q 70 75 50 65" fill="#fde047" opacity="0.5" />
+
+                <!-- Feixe de luz (glow) vindo da lâmpada -->
+                <defs>
+                    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+                        <stop offset="0%" stop-color="rgba(250, 204, 21, 0.35)" />
+                        <stop offset="40%" stop-color="rgba(250, 204, 21, 0.12)" />
+                        <stop offset="100%" stop-color="rgba(250, 204, 21, 0)" />
+                    </radialGradient>
+                </defs>
+                <!-- cone de luz projetado no chão -->
+                <polygon points="200,140 80,280 320,280" fill="url(#glow)" />
+
+                <!-- PAINEL SOLAR (parte superior) -->
+                <rect x="155" y="40" width="90" height="30" rx="4" fill="#1e293b" stroke="#475569" stroke-width="2" />
+                <line x1="175" y1="40" x2="170" y2="70" stroke="#3b82f6" stroke-width="1.5" opacity="0.7" />
+                <line x1="200" y1="40" x2="200" y2="70" stroke="#3b82f6" stroke-width="1.5" opacity="0.7" />
+                <line x1="225" y1="40" x2="230" y2="70" stroke="#3b82f6" stroke-width="1.5" opacity="0.7" />
+
+                <!-- CORPO DA LÂMPADA -->
+                <rect x="165" y="70" width="70" height="50" rx="6" fill="#334155" stroke="#475569" stroke-width="1.5" />
+                <!-- LEDS (luz acesa) -->
+                <rect x="175" y="80" width="50" height="30" rx="4" fill="#fef08a" stroke="#eab308" stroke-width="1" />
+                <!-- linhas de divisão dos LEDs -->
+                <line x1="192" y1="80" x2="192" y2="110" stroke="#94a3b8" stroke-width="1" />
+                <line x1="208" y1="80" x2="208" y2="110" stroke="#94a3b8" stroke-width="1" />
+
+                <!-- SENSOR DE MOVIMENTO (PIR) -->
+                <circle cx="200" cy="120" r="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2" />
+                <circle cx="200" cy="120" r="6" fill="#94a3b8" opacity="0.5" />
+                <!-- ondas de detecção -->
+                <path d="M 185 135 A 20 20 0 0 0 215 135" fill="none" stroke="#facc15" stroke-width="2.5" stroke-dasharray="5,3" class="sensor-wave" />
+                <path d="M 170 150 A 40 40 0 0 0 230 150" fill="none" stroke="#facc15" stroke-width="2" stroke-dasharray="5,3" class="sensor-wave" style="animation-delay: 0.5s;" />
+                
+                <!-- Texto descritivo minimalista -->
+                <text x="30" y="20" fill="#facc15" font-size="12" font-weight="bold" letter-spacing="1">FOTOVOLTAICO</text>
+                <text x="300" y="20" fill="#38bdf8" font-size="12" font-weight="bold" letter-spacing="1">SENSOR PRO</text>
+            </svg>
+
+            <!-- Carrossel de indicadores (bolinhas) -->
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-white shadow-lg"></span>
+                <span class="w-2 h-2 rounded-full bg-white/50"></span>
+                <span class="w-2 h-2 rounded-full bg-white/50"></span>
+                <span class="w-2 h-2 rounded-full bg-white/50"></span>
+            </div>
+
+            <!-- Selo de destaque (Campeão de Vendas) -->
+            <span class="absolute top-4 left-4 bg-red-600 text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">
+                ⭐ Campeão de Vendas
+            </span>
+        </div>
+
+        <!-- ===== CONTEÚDO DO PRODUTO ===== -->
+        <div class="p-5">
+
+            <!-- Benefícios rápidos em lista (estilo ícones) -->
+            <ul class="space-y-2.5 mb-5 text-sm text-gray-700 bg-emerald-50/60 p-4 rounded-2xl border border-emerald-200 shadow-inner">
+                <li class="flex items-start gap-2.5">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
+                    <span><strong class="text-gray-800">Alívio Profundo:</strong> Massagem vibratória + pomada analgésica para dores musculares e articulares.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
+                    <span><strong class="text-gray-800">Fácil de usar:</strong> Design ergonómico, 3 intensidades e pomada incluída para aplicação imediata.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
+                    <span><strong class="text-gray-800">Resultados Rápidos:</strong> Reduz a rigidez e melhora a mobilidade em poucos minutos de uso diário.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
+                    <span><strong class="text-gray-800">Portátil e Recarregável:</strong> Bateria de longa duração, leva para qualquer lugar.</span>
+                </li>
+            </ul>
+
+            <!-- Título do Produto (igual ao estilo da imagem) -->
+            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight">
+                Kit 2 em 1 – Massageador com Pomada para Dores
+            </h1>
+
+            <!-- Avaliação com estrelas e vendas -->
+            <div class="flex items-center gap-1.5 mt-2.5">
+                <div class="flex text-amber-400">
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star-half" class="w-4 h-4 fill-amber-400"></i>
+                </div>
+                <span class="text-sm font-bold text-gray-800">4.5</span>
+                <span class="text-xs text-gray-500 font-medium">(1736 VENDIDOS)</span>
+            </div>
+
+            <hr class="my-5 border-gray-200" />
+
+            <!-- ===== SEÇÃO DE PREÇOS E OPÇÕES DE KIT ===== -->
+            <div class="mb-6">
+                <span class="text-xs uppercase tracking-wider text-gray-500 font-bold block mb-3">
+                    Escolha o seu kit:
+                </span>
+
+                <!-- Opção 1: Kit Básico (1 unidade) -->
+                <div class="space-y-3" id="pricing-options">
+                    <label class="relative flex items-center justify-between p-4 rounded-xl border-2 border-gray-200 cursor-pointer transition-all hover:border-emerald-500 bg-white" onclick="selectOption('opt1', 2897)">
+                        <input type="radio" name="kit" id="opt1" class="sr-only" checked />
+                        <div class="flex items-center gap-3">
+                            <span class="custom-radio w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center shrink-0">
+                                <span class="dot w-2.5 h-2.5 rounded-full bg-emerald-500 hidden"></span>
+                            </span>
+                            <div>
+                                <span class="font-extrabold text-gray-900 block text-base">1 Kit</span>
+                                <span class="text-xs text-amber-600 font-semibold">Ideal para alívio localizado</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xl font-black text-gray-900 block" id="price-opt1">2.897,00 Mt</span>
+                            <span class="text-[10px] text-gray-400 line-through">4.900,00 Mt</span>
+                            <span class="block text-[10px] font-bold text-emerald-600">SAVE 40%</span>
+                        </div>
+                    </label>
+
+                    <!-- Opção 2: Kit Duplo (mais vendido) -->
+                    <label class="relative flex items-center justify-between p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50/30 cursor-pointer transition-all hover:border-emerald-600" onclick="selectOption('opt2', 5200)">
+                        <span class="absolute -top-2.5 right-4 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm flex items-center gap-1">
+                            <i data-lucide="sparkles" class="w-3 h-3"></i> MAIS VENDIDO
+                        </span>
+                        <input type="radio" name="kit" id="opt2" class="sr-only" />
+                        <div class="flex items-center gap-3">
+                            <span class="custom-radio w-5 h-5 rounded-full border-2 border-emerald-500 flex items-center justify-center shrink-0">
+                                <span class="dot w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+                            </span>
+                            <div>
+                                <span class="font-extrabold text-gray-900 block text-base">2 Kits (Duplo)</span>
+                                <span class="text-xs text-emerald-700 font-semibold">Ideal para casal ou presente</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xl font-black text-emerald-600 block" id="price-opt2">5.200,00 Mt</span>
+                            <span class="text-[10px] text-gray-400 line-through">9.800,00 Mt</span>
+                            <span class="block text-[10px] font-bold text-emerald-600">SAVE 47%</span>
+                        </div>
+                    </label>
+
+                    <!-- Opção 3: Kit Família (3 unidades) -->
+                    <label class="relative flex items-center justify-between p-4 rounded-xl border-2 border-gray-200 cursor-pointer transition-all hover:border-emerald-500 bg-white" onclick="selectOption('opt3', 7500)">
+                        <input type="radio" name="kit" id="opt3" class="sr-only" />
+                        <div class="flex items-center gap-3">
+                            <span class="custom-radio w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center shrink-0">
+                                <span class="dot w-2.5 h-2.5 rounded-full bg-emerald-500 hidden"></span>
+                            </span>
+                            <div>
+                                <span class="font-extrabold text-gray-900 block text-base">3 Kits (Família)</span>
+                                <span class="text-xs text-amber-600 font-semibold">Melhor custo-benefício</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xl font-black text-gray-900 block" id="price-opt3">7.500,00 Mt</span>
+                            <span class="text-[10px] text-gray-400 line-through">14.700,00 Mt</span>
+                            <span class="block text-[10px] font-bold text-emerald-600">SAVE 49%</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Banner de urgência (oferta válida hoje) -->
+            <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-xl p-3 text-amber-800 text-sm font-semibold mb-5">
+                <i data-lucide="clock" class="w-5 h-5 shrink-0 text-amber-600 animate-pulse"></i>
+                <span><span class="font-extrabold">⏳ Oferta válida hoje apenas</span> — Aproveite 40% de desconto + entrega grátis!</span>
+            </div>
+
+            <!-- ===== BOTÕES DE AÇÃO PRINCIPAIS ===== -->
+            <div class="space-y-3.5">
+                <!-- Botão Encomendar Agora (com efeito pulse) -->
+                <button onclick="openOrderModal()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-2xl flex flex-col items-center justify-center transition-all shadow-xl pulse-btn border-b-4 border-emerald-800 active:border-b-2">
+                    <span class="flex items-center gap-2 text-lg uppercase tracking-wider">
+                        <i data-lucide="shopping-cart" class="w-5 h-5"></i> ENCOMENDE AGORA
+                    </span>
+                    <span class="text-xs font-normal opacity-90">Pague na entrega • Entregamos em todo o país</span>
+                </button>
+
+                <!-- Botão WhatsApp -->
+                <button onclick="sendWhatsAppOrder()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3.5 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all shadow-md border-b-4 border-green-700 active:border-b-2">
+                    <i data-lucide="message-square" class="w-6 h-6 fill-white"></i>
+                    <div class="text-left">
+                        <span class="block text-base leading-tight font-extrabold">Falar no WhatsApp</span>
+                        <span class="block text-[11px] font-normal opacity-90">Respondemos rapidamente! 💬</span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Link de compartilhamento (copiar) -->
+            <div class="mt-4 flex justify-center">
+                <button onclick="copyPageLink()" class="text-xs text-gray-500 underline flex items-center gap-1.5 hover:text-gray-800 transition-colors">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copiar link da oferta
+                </button>
+            </div>
+
+            <hr class="my-6 border-gray-200" />
+
+            <!-- ===== COPY PERSUASIVA (ESTILO IMAGEM) ===== -->
+            <div class="space-y-4">
+                <h2 class="text-xl font-bold text-center text-gray-900 leading-tight">
+                    Este é <span class="text-amber-500 font-extrabold underline decoration-amber-400">o alívio que o seu corpo procura</span> todos os dias.
+                </h2>
+                <p class="text-sm text-gray-600 leading-relaxed text-center">
+                    As dores musculares e articulares limitam movimentos e reduzem a qualidade de vida. 
+                    Este kit combina <strong>massageador e pomada para dores</strong>, que ajudam a reduzir os sintomas de dor e a melhorar a qualidade de vida.
+                </p>
+
+                <!-- Ilustração de aplicação (mini infográfico) -->
+                <div class="rounded-2xl overflow-hidden shadow-md border border-gray-200 bg-slate-50 p-3">
+                    <svg viewBox="0 0 350 120" class="w-full h-auto">
+                        <!-- desenho simples de uma pessoa recebendo massagem -->
+                        <circle cx="80" cy="60" r="18" fill="#cbd5e1" />
+                        <rect x="65" y="75" width="30" height="40" rx="10" fill="#94a3b8" />
+                        <!-- massageador vibratório -->
+                        <rect x="110" y="55" width="18" height="30" rx="5" fill="#facc15" stroke="#ca8a04" stroke-width="1.5" />
+                        <line x1="119" y1="55" x2="119" y2="85" stroke="#ca8a04" stroke-width="2" stroke-dasharray="3,2" />
+                        <!-- pomada -->
+                        <rect x="145" y="50" width="25" height="35" rx="4" fill="#38bdf8" stroke="#0284c7" stroke-width="1.5" />
+                        <text x="148" y="72" font-size="8" fill="white" font-weight="bold">POM</text>
+                        <!-- seta de alívio -->
+                        <path d="M 200 60 Q 240 30 280 60" stroke="#22c55e" stroke-width="3" fill="none" stroke-dasharray="5,3" />
+                        <text x="215" y="25" font-size="10" fill="#16a34a" font-weight="bold">Alívio imediato</text>
+                        <!-- ícone de check -->
+                        <circle cx="280" cy="60" r="10" fill="#22c55e" />
+                        <path d="M 275 60 L 279 65 L 287 55" stroke="white" stroke-width="2" fill="none" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- ===== PERGUNTAS FREQUENTES (FAQ) ===== -->
+            <div class="mt-8 space-y-4">
+                <h3 class="text-lg font-bold text-gray-900 border-l-4 border-emerald-500 pl-2.5">Perguntas Frequentes</h3>
+                <div class="space-y-3">
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-sm text-gray-900">💳 Como funciona o pagamento na entrega?</h4>
+                        <p class="text-xs text-gray-600 mt-1.5">Pode pagar em numerário, M-Pesa ou eMola no momento em que receber o produto. Sem riscos, só paga se gostar!</p>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-sm text-gray-900">🧴 A pomada é incluída em todos os kits?</h4>
+                        <p class="text-xs text-gray-600 mt-1.5">Sim, cada kit vem com uma pomada analgésica de alta qualidade, ideal para dores musculares e articulares.</p>
+                    </div>
+                    <div class="p-3.5 bg-gray-50 rounded-xl border border-gray-100">
+                        <h4 class="font-bold text-sm text-gray-900">🚚 Quanto tempo demora a entrega?</h4>
+                        <p class="text-xs text-gray-600 mt-1.5">Para Maputo e Matola, a entrega é feita em 24h úteis. Para outras províncias, entre 2 a 4 dias úteis.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- /conteúdo -->
+
+        <!-- ===== BANNER FLUTUANTE (FIXO NO RODAPÉ MOBILE) ===== -->
+        <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t-2 border-gray-200 p-3 flex items-center justify-between shadow-2xl z-40 backdrop-blur-sm bg-white/95">
+            <div class="flex flex-col">
+                <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Selecionado:</span>
+                <span id="floating-kit-name" class="text-xs font-extrabold text-gray-900">1 Kit</span>
+                <span id="floating-kit-price" class="text-base font-black text-emerald-600">2.897,00 Mt</span>
+            </div>
+            <button onclick="openOrderModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl flex items-center gap-2 shadow-lg active:scale-95 transition-all text-sm uppercase tracking-wide">
+                <i data-lucide="shopping-bag" class="w-4 h-4"></i> Encomendar
+            </button>
+        </div>
+
+    </main>
+
+    <!-- ===== MODAL DE FINALIZAÇÃO DE ENCOMENDA ===== -->
+    <div id="orderModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="orderModalContent">
+            <!-- Header -->
+            <div class="bg-emerald-600 text-white p-4 flex items-center justify-between">
+                <div>
+                    <h3 class="font-extrabold text-lg">📦 Finalizar Encomenda</h3>
+                    <p class="text-xs text-emerald-100">Preencha os dados para entrega</p>
+                </div>
+                <button onclick="closeOrderModal()" class="text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-1.5 rounded-full transition-all">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="p-5 space-y-4">
+                <!-- Resumo do pedido -->
+                <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex justify-between items-center text-sm">
+                    <span class="font-semibold text-gray-700" id="modal-summary-name">1 Kit</span>
+                    <span class="font-extrabold text-emerald-600" id="modal-summary-price">2.897,00 Mt</span>
+                </div>
+
+                <!-- Formulário -->
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1.5">Nome Completo</label>
+                    <input type="text" id="cust-name" placeholder="Ex: Maria Joaquina" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" />
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1.5">Contacto Telefónico</label>
+                    <input type="tel" id="cust-phone" placeholder="Ex: 84 123 4567" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" />
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1.5">Endereço de Entrega</label>
+                    <input type="text" id="cust-addr" placeholder="Ex: Maputo, Bairro Central, Rua X" class="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm" />
+                </div>
+
+                <!-- selo de segurança -->
+                <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 flex items-start gap-2.5">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+                    <span><strong class="text-amber-900">Pague na entrega</strong> — Só paga quando receber o produto nas suas mãos!</span>
+                </div>
+
+                <button onclick="submitOrder()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-sm uppercase tracking-wide flex items-center justify-center gap-2 shadow-lg transition-all">
+                    <i data-lucide="check" class="w-4 h-4"></i> Confirmar Encomenda
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST DE NOTIFICAÇÃO (SUBSTITUI O ALERT) ===== -->
+    <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl z-50 flex items-center gap-3 max-w-sm w-[90%] text-sm font-semibold border border-gray-700 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="p-1 rounded-full bg-emerald-500/20 text-emerald-400">
+            <i data-lucide="check-circle" class="w-5 h-5"></i>
+        </div>
+        <span id="toast-msg">Mensagem</span>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // Inicializa ícones Lucide
+        lucide.createIcons();
+
+        // Estado da seleção
+        let selectedKitName = "1 Kit";
+        let selectedPrice = "2.897,00 Mt";
+
+        // Atualiza elementos flutuantes
+        function updateFloatingElements() {
+            document.getElementById('floating-kit-name').innerText = selectedKitName;
+            document.getElementById('floating-kit-price').innerText = selectedPrice;
+            document.getElementById('modal-summary-name').innerText = selectedKitName;
+            document.getElementById('modal-summary-price').innerText = selectedPrice;
+        }
+
+        // Função de seleção de opção
+        function selectOption(id, price) {
+            const labels = document.querySelectorAll('#pricing-options label');
+            labels.forEach(lbl => {
+                lbl.classList.remove('border-emerald-500', 'bg-emerald-50/30');
+                lbl.classList.add('border-gray-200', 'bg-white');
+                const dot = lbl.querySelector('.dot');
+                if (dot) dot.classList.add('hidden');
+                const radio = lbl.querySelector('.custom-radio');
+                if (radio) {
+                    radio.classList.remove('border-emerald-500');
+                    radio.classList.add('border-gray-300');
+                }
+            });
+
+            const targetInput = document.getElementById(id);
+            targetInput.checked = true;
+            const selectedLabel = targetInput.closest('label');
+            selectedLabel.classList.remove('border-gray-200', 'bg-white');
+            selectedLabel.classList.add('border-emerald-500', 'bg-emerald-50/30');
+            
+            const currentRadio = selectedLabel.querySelector('.custom-radio');
+            if (currentRadio) {
+                currentRadio.classList.remove('border-gray-300');
+                currentRadio.classList.add('border-emerald-500');
+            }
+            const currentDot = selectedLabel.querySelector('.dot');
+            if (currentDot) {
+                currentDot.classList.remove('hidden');
+            }
+
+            // Atualiza nome e preço
+            const nameSpan = selectedLabel.querySelector('.font-extrabold');
+            if (nameSpan) selectedKitName = nameSpan.textContent;
+            selectedPrice = price.toLocaleString('pt-PT', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' Mt';
+            updateFloatingElements();
+        }
+
+        // Modal
+        function openOrderModal() {
+            const modal = document.getElementById('orderModal');
+            const content = document.getElementById('orderModalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 50);
+        }
+        function closeOrderModal() {
+            const modal = document.getElementById('orderModal');
+            const content = document.getElementById('orderModalContent');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150);
+        }
+
+        // Envio via WhatsApp (botão flutuante)
+        function sendWhatsAppOrder() {
+            const phone = "258840000000"; // substituir pelo número real
+            const msg = `Olá! Vi o anúncio do Kit Massageador com Pomada e quero encomendar:\n\n⭐ ${selectedKitName}\n💰 Preço: ${selectedPrice}\n\nPago na entrega. Aguardo confirmação!`;
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // Submissão do formulário (modal)
+        function submitOrder() {
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const addr = document.getElementById('cust-addr').value.trim();
+
+            if (!name || !phone || !addr) {
+                showToast("⚠️ Preencha todos os campos para continuar.", "error");
+                return;
+            }
+
+            const fullMsg = `🔥 *NOVA ENCOMENDA* 🔥\n\n📦 *Produto:* Kit Massageador com Pomada\n📌 *Kit:* ${selectedKitName}\n💰 *Valor:* ${selectedPrice}\n👤 *Nome:* ${name}\n📞 *Contacto:* ${phone}\n📍 *Endereço:* ${addr}\n\nEntregar e cobrar na recepção.`;
+            const phone = "258840000000"; // substituir
+            closeOrderModal();
+            showToast("✅ Encomenda registada! A redirecionar para o WhatsApp...", "success");
+            setTimeout(() => {
+                window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(fullMsg)}`, '_blank');
+            }, 1200);
+        }
+
+        // Copiar link
+        function copyPageLink() {
+            const dummy = document.createElement('input');
+            dummy.value = window.location.href;
+            document.body.appendChild(dummy);
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+            showToast("🔗 Link copiado para a área de transferência!", "success");
+        }
+
+        // Toast
+        function showToast(message, type = "success") {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            toastMsg.innerText = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+            if (type === "error") {
+                toast.classList.add('border-red-600');
+                toast.classList.remove('border-emerald-600');
+            } else {
+                toast.classList.add('border-emerald-600');
+                toast.classList.remove('border-red-600');
+            }
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 4000);
+        }
+
+        // Inicializar com a primeira opção selecionada
+        document.addEventListener('DOMContentLoaded', () => {
+            selectOption('opt1', 2897);
+        });
+    </script>
+</body>
+</html>
