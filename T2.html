@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lâmpada Solar Inteligente com Sensor de Aproximação</title>
+    <!-- Tailwind CSS para um design moderno e limpo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons para ícones bonitos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 selection:bg-blue-100 selection:text-blue-800">
+
+    <!-- Banner de Alerta / Urgência Superior -->
+    <div class="bg-yellow-500 text-black text-center py-2 px-4 text-xs md:text-sm font-bold flex items-center justify-center gap-2">
+        <i data-lucide="zap" class="w-4 h-4 animate-bounce"></i>
+        <span>PROMOÇÃO EXCLUSIVA: PORTES GRÁTIS PARA MAPUTO E MATOLA HOJE!</span>
+    </div>
+
+    <!-- Container Principal (Otimizado para Mobile como no Anexo) -->
+    <main class="max-w-md mx-auto bg-white min-h-screen shadow-xl pb-28 relative">
+        
+        <!-- Galeria / Imagem Principal do Produto -->
+        <div class="relative bg-gray-100 aspect-video md:aspect-square w-full overflow-hidden">
+            <div class="w-full h-full relative">
+                <!-- SVG Ilustrativo de Alta Qualidade da Lâmpada Solar -->
+                <svg viewBox="0 0 400 400" class="w-full h-full bg-slate-900">
+                    <defs>
+                        <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#0f172a" />
+                            <stop offset="100%" stop-color="#1e293b" />
+                        </linearGradient>
+                        <radialGradient id="lightGlow" cx="50%" cy="40%" r="50%">
+                            <stop offset="0%" stop-color="rgba(254, 240, 138, 0.6)" />
+                            <stop offset="50%" stop-color="rgba(254, 240, 138, 0.2)" />
+                            <stop offset="100%" stop-color="rgba(254, 240, 138, 0)" />
+                        </radialGradient>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#sky)" />
+                    <polygon points="200,160 50,400 350,400" fill="url(#lightGlow)" class="opacity-80" />
+                    <circle cx="50" cy="60" r="1.5" fill="#fff" opacity="0.8" />
+                    <circle cx="320" cy="80" r="1" fill="#fff" opacity="0.5" />
+                    <polygon points="150,110 250,110 270,130 130,130" fill="#1e3a8a" stroke="#475569" stroke-width="2" />
+                    <path d="M 140,130 L 260,130 L 250,180 L 150,180 Z" fill="#334155" />
+                    <polygon points="155,140 195,140 195,170 155,170" fill="#fef08a" />
+                    <polygon points="205,140 245,140 245,170 205,170" fill="#fef08a" />
+                    <circle cx="200" cy="180" r="10" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1" />
+                    <text x="20" y="30" fill="#facc15" font-size="12" font-weight="bold">FOTOVOLTAICO</text>
+                    <text x="280" y="30" fill="#38bdf8" font-size="12" font-weight="bold">AUTO ON/OFF</text>
+                </svg>
+                
+                <span class="absolute top-3 left-3 bg-red-600 text-white text-xs font-extrabold px-2.5 py-1 rounded uppercase tracking-wider">
+                    Campeão de Vendas
+                </span>
+            </div>
+        </div>
+
+        <!-- Paginação de bolinhas idêntica à foto do anexo -->
+        <div class="flex justify-center gap-1.5 py-3 bg-white">
+            <span class="w-2 h-2 rounded-full bg-gray-800"></span>
+            <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+            <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+            <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+            <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+        </div>
+
+        <!-- Conteúdo Principal do Produto -->
+        <div class="p-5">
+            
+            <!-- Título do Produto -->
+            <h1 class="text-2xl md:text-3xl font-extrabold text-gray-950 leading-tight tracking-tight">
+                Super Lâmpada LED Solar Pro – Com Sensor de Aproximação e Presença
+            </h1>
+
+            <!-- Classificação e Vendas -->
+            <div class="flex items-center gap-1.5 mt-2">
+                <div class="flex text-amber-400">
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
+                </div>
+                <span class="text-sm font-bold text-gray-800">4.9</span>
+                <span class="text-xs text-gray-500 font-bold uppercase">(2.419 UNIDADES VENDIDAS)</span>
+            </div>
+
+            <!-- Bloco de Preço Principal (Estilo Tabacaria Nova) -->
+            <div class="mt-4">
+                <div class="flex items-baseline gap-3">
+                    <span id="main-price" class="text-3xl font-black text-[#0076db]">3.800.00 Mt</span>
+                    <span id="old-price" class="text-base text-gray-500 line-through font-medium">6,600.00 Mt</span>
+                </div>
+                <!-- Tag de Desconto "SAVE XX%" -->
+                <div id="discount-badge" class="inline-flex items-center gap-1 bg-[#0084ff] text-white text-[11px] font-extrabold px-2 py-0.5 rounded mt-1.5 uppercase tracking-wide">
+                    <i data-lucide="tag" class="w-3 h-3 fill-white"></i> SAVE 42%
+                </div>
+            </div>
+
+            <!-- Gatilho de Urgência -->
+            <div class="flex items-center gap-1.5 mt-4 text-red-600 font-extrabold text-sm uppercase tracking-wide">
+                <span class="text-amber-500 text-lg">⚡</span>
+                <span>Oferta valida hoje apenas</span>
+            </div>
+
+            <!-- BOTÕES DE COMPRA PRINCIPAIS (Estilo e Cores Exatas do Anexo) -->
+            <div class="space-y-4 mt-5">
+                <!-- Botão Encomendar Agora -->
+                <button onclick="openOrderModal()" class="w-full bg-[#1ea104] hover:bg-[#1a8e03] text-white font-extrabold py-3.5 px-6 rounded flex flex-col items-center justify-center transition-all shadow-md">
+                    <span class="flex items-center gap-2 text-lg uppercase tracking-wider">
+                        <i data-lucide="shopping-cart" class="w-5 h-5 fill-white"></i> ENCOMENDE AGORA
+                    </span>
+                    <span class="text-xs font-normal opacity-90 mt-0.5">Pague na entrega</span>
+                </button>
+
+                <!-- Botão Enviar Mensagem via WhatsApp -->
+                <div>
+                    <button onclick="sendWhatsAppOrder()" class="w-full bg-[#16d15e] hover:bg-[#13bc54] text-white font-extrabold py-3.5 px-6 rounded flex items-center justify-center gap-2 transition-all shadow-sm text-base uppercase tracking-wide">
+                        <i data-lucide="message-square" class="w-5 h-5 fill-white"></i>
+                        <span>Falar no WhatsApp</span>
+                    </button>
+                    <span class="block text-center text-xs text-gray-500 font-medium mt-1.5">
+                        Respondemos rapidamente! 💬
+                    </span>
+                </div>
+            </div>
+
+            <hr class="my-6 border-gray-200" />
+
+            <!-- SEÇÃO DE SELEÇÃO DE KITS -->
+            <div class="mb-6 bg-gray-50 p-4 rounded-xl border border-gray-200">
+                <span class="text-xs uppercase tracking-wider text-gray-600 font-bold block mb-3">
+                    Selecione a sua opção de Kit abaixo:
+                </span>
+                
+                <div class="space-y-3" id="pricing-options">
+                    <!-- Opção 1 -->
+                    <label class="relative flex items-center justify-between p-3.5 rounded-lg border-2 border-gray-200 cursor-pointer transition-all bg-white" onclick="selectOption('opt1', '1.450.00 Mt', '2,200.00 Mt', 'SAVE 34%')">
+                        <input type="radio" name="kit-selection" id="opt1" class="sr-only" />
+                        <div class="flex items-center gap-2.5">
+                            <span class="custom-radio w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center shrink-0">
+                                <span class="dot w-2 h-2 rounded-full bg-[#0076db] hidden"></span>
+                            </span>
+                            <div>
+                                <span class="font-bold text-gray-900 block text-sm">1 Unidade</span>
+                                <span class="text-[11px] text-gray-500">Ideal para a porta de entrada</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-base font-black text-gray-900 block">1.450 Mt</span>
+                        </div>
+                    </label>
+
+                    <!-- Opção 2 (Mais Vendida!) -->
+                    <label class="relative flex items-center justify-between p-3.5 rounded-lg border-2 border-[#0076db] bg-blue-50/20 cursor-pointer transition-all" onclick="selectOption('opt3', '3,800.00 Mt', '6,600.00 Mt', 'SAVE 42%')">
+                        <input type="radio" name="kit-selection" id="opt3" class="sr-only" checked />
+                        <div class="flex items-center gap-2.5">
+                            <span class="custom-radio w-4 h-4 rounded-full border-2 border-[#0076db] flex items-center justify-center shrink-0">
+                                <span class="dot w-2 h-2 rounded-full bg-[#0076db]"></span>
+                            </span>
+                            <div>
+                                <span class="font-bold text-gray-900 block text-sm">Kit com 3 unidades</span>
+                                <span class="text-[11px] text-[#0076db] font-semibold">Recomendado para o quintal exterior</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-base font-black text-[#0076db] block">3.800 Mt</span>
+                        </div>
+                    </label>
+
+                    <!-- Opção 3 -->
+                    <label class="relative flex items-center justify-between p-3.5 rounded-lg border-2 border-gray-200 cursor-pointer transition-all bg-white" onclick="selectOption('opt6', '6,800.00 Mt', '13,200.00 Mt', 'SAVE 48%')">
+                        <input type="radio" name="kit-selection" id="opt6" class="sr-only" />
+                        <div class="flex items-center gap-2.5">
+                            <span class="custom-radio w-4 h-4 rounded-full border-2 border-gray-300 flex items-center justify-center shrink-0">
+                                <span class="dot w-2 h-2 rounded-full bg-[#0076db] hidden"></span>
+                            </span>
+                            <div>
+                                <span class="font-bold text-gray-900 block text-sm">Kit com 6 unidades</span>
+                                <span class="text-[11px] text-gray-500">Desconto máximo para moradias grandes</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-base font-black text-gray-900 block">6.800 Mt</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Benefícios Rápidos de Ícones -->
+            <ul class="space-y-2.5 my-6 text-sm text-gray-700 bg-gray-50 p-4 rounded-xl border border-gray-200">
+                <li class="flex items-start gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[3]"></i>
+                    <span><strong>Fácil Instalação:</strong> Sem cabos, fios ou furos complexos.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[3]"></i>
+                    <span><strong>Sensor Inteligente:</strong> Acende sozinho ao detetar presença a até 5 metros.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 stroke-[3]"></i>
+                    <span><strong>Custo Zero na Fatura:</strong> Carrega 100% com energia solar durante o dia.</span>
+                </li>
+            </ul>
+
+            <!-- Secção de Cópia Persuasiva (Estilo de Destaque Textual do Anexo) -->
+            <div class="space-y-4 mt-6">
+                <h2 class="text-xl font-extrabold text-gray-900 leading-tight">
+                    Este é <span class="text-[#ffb703]">o alívio financeiro</span> que a sua casa procura todos os dias.
+                </h2>
+                <p class="text-sm text-gray-600 leading-relaxed">
+                    A escuridão e os custos exorbitantes da fatura de eletricidade limitam a sua segurança e reduzem a tranquilidade da sua família. Este kit combina <strong>iluminação solar inteligente potente</strong> com um <strong>sensor de aproximação ultrassensível</strong> para atuar diretamente no aumento da segurança do seu quintal sem acrescentar um único Metical na sua conta mensal.
+                </p>
+            </div>
+
+            <!-- Secção de Perguntas Frequentes -->
+            <div class="mt-8 space-y-4">
+                <h3 class="text-lg font-bold text-gray-900 border-l-4 border-[#0076db] pl-2">Perguntas Frequentes</h3>
+                <div class="space-y-3">
+                    <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                        <h4 class="font-bold text-xs text-gray-900">Como funciona o pagamento na entrega?</h4>
+                        <p class="text-xs text-gray-600 mt-1">Nós enviamos o produto gratuitamente até à sua casa em Maputo ou Matola. Você avalia o material e paga o estafeta no momento com M-Pesa, eMola ou Numerário.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Banner Flutuante Fixo Inferior -->
+        <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-200 p-3 flex items-center justify-between shadow-2xl z-40">
+            <div class="flex flex-col">
+                <span id="floating-kit-name" class="text-xs font-bold text-gray-900">Kit com 3 unidades</span>
+                <span id="floating-kit-price" class="text-lg font-black text-[#0076db]">3.800.00 Mt</span>
+            </div>
+            <button onclick="openOrderModal()" class="bg-[#1ea104] hover:bg-[#1a8e03] text-white text-xs font-extrabold py-2.5 px-5 rounded shadow-sm transition-all uppercase tracking-wider">
+                ENCOMENDAR
+            </button>
+        </div>
+
+    </main>
+
+    <!-- MODAL DE CHECKOUT POPUP -->
+    <div id="orderModal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-xl w-full max-w-md overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="orderModalContent">
+            
+            <div class="bg-[#0076db] text-white p-4 flex items-center justify-between">
+                <div>
+                    <h3 class="font-extrabold text-lg">Finalizar Encomenda</h3>
+                    <p class="text-xs text-blue-100 font-medium">Preencha os dados de entrega rápida</p>
+                </div>
+                <button onclick="closeOrderModal()" class="text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-1.5 rounded-full transition-all">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="p-5 space-y-4">
+                <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 flex justify-between items-center text-sm">
+                    <span class="font-semibold text-gray-700" id="modal-summary-name">Kit com 3 unidades</span>
+                    <span class="font-extrabold text-[#0076db]" id="modal-summary-price">3.800.00 Mt</span>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Nome Completo</label>
+                    <input type="text" id="cust-name" placeholder="Ex: Chelton Salvador" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Contacto Telefónico</label>
+                    <input type="tel" id="cust-phone" placeholder="Ex: 84XXXXXXX ou 85XXXXXXX" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Cidade / Bairro de Entrega</label>
+                    <input type="text" id="cust-addr" placeholder="Ex: Maputo, Bairro Central" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                </div>
+
+                <button onclick="submitOrder()" class="w-full bg-[#1ea104] hover:bg-[#1a8e03] text-white font-bold py-3.5 rounded text-sm uppercase tracking-wide flex items-center justify-center gap-2 shadow-md">
+                    <i data-lucide="check" class="w-4 h-4"></i> Confirmar Encomenda
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Mensagem -->
+    <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-4 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2.5 max-w-sm w-[90%] text-sm font-semibold opacity-0 pointer-events-none transition-all duration-300">
+        <span id="toast-msg">Mensagem padrão</span>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Estado Inicial padrão
+        let selectedKitName = "Kit com 3 unidades";
+        let selectedPrice = "3,800.00 Mt";
+
+        // Mapeamento dinâmico para o topo se atualizar como a página de referência
+        function selectOption(id, price, oldPrice, saveText) {
+            const labels = document.querySelectorAll('#pricing-options label');
+            labels.forEach(lbl => {
+                lbl.classList.remove('border-[#0076db]', 'bg-blue-50/20');
+                lbl.classList.add('border-gray-200', 'bg-white');
+                const dot = lbl.querySelector('.dot');
+                if (dot) dot.classList.add('hidden');
+                const radio = lbl.querySelector('.custom-radio');
+                if (radio) {
+                    radio.classList.remove('border-[#0076db]');
+                    radio.classList.add('border-gray-300');
+                }
+            });
+
+            const targetInput = document.getElementById(id);
+            targetInput.checked = true;
+            const selectedLabel = targetInput.closest('label');
+            selectedLabel.classList.remove('border-gray-200', 'bg-white');
+            selectedLabel.classList.add('border-[#0076db]', 'bg-blue-50/20');
+
+            const currentRadio = selectedLabel.querySelector('.custom-radio');
+            if (currentRadio) {
+                currentRadio.classList.remove('border-gray-300');
+                currentRadio.classList.add('border-[#0076db]');
+            }
+            const currentDot = selectedLabel.querySelector('.dot');
+            if (currentDot) currentDot.classList.remove('hidden');
+
+            // Atualiza os elementos da tela principal conforme a referência
+            document.getElementById('main-price').innerText = price;
+            document.getElementById('old-price').innerText = oldPrice;
+            document.getElementById('discount-badge').innerHTML = `<i data-lucide="tag" class="w-3 h-3 fill-white"></i> ${saveText}`;
+            lucide.createIcons();
+
+            selectedKitName = selectedLabel.querySelector('.font-bold').textContent;
+            selectedPrice = price;
+
+            document.getElementById('floating-kit-name').innerText = selectedKitName;
+            document.getElementById('floating-kit-price').innerText = selectedPrice;
+            document.getElementById('modal-summary-name').innerText = selectedKitName;
+            document.getElementById('modal-summary-price').innerText = selectedPrice;
+        }
+
+        function openOrderModal() {
+            const modal = document.getElementById('orderModal');
+            const content = document.getElementById('orderModalContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 50);
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('orderModal');
+            const content = document.getElementById('orderModalContent');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150);
+        }
+
+        function sendWhatsAppOrder() {
+            const phoneNumber = "258840000000"; 
+            const baseMsg = `Olá! Vi o anúncio da Lâmpada Solar Pro e gostaria de encomendar a seguinte opção:\n\n⭐ *${selectedKitName}*\n💰 Preço: *${selectedPrice}*\n\nAguardo retorno!`;
+            window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(baseMsg)}`, '_blank');
+        }
+
+        function submitOrder() {
+            const name = document.getElementById('cust-name').value.trim();
+            const phone = document.getElementById('cust-phone').value.trim();
+            const addr = document.getElementById('cust-addr').value.trim();
+
+            if (!name || !phone || !addr) {
+                showToast("Por favor preencha todos os campos.");
+                return;
+            }
+
+            const phoneNumber = "258840000000";
+            const fullMessage = `🔥 *NOVA ENCOMENDA* 🔥\n\n📌 *Produto:* Lâmpada Solar Pro\n📦 *Pacote:* ${selectedKitName}\n💵 *Valor:* ${selectedPrice}\n👤 *Cliente:* ${name}\n📞 *Contacto:* ${phone}\n📍 *Entrega:* ${addr}`;
+            
+            closeOrderModal();
+            showToast("Encomenda efetuada! A redirecionar...");
+
+            setTimeout(() => {
+                window.open(`https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(fullMessage)}`, '_blank');
+            }, 1200);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
