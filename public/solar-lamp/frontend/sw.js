@@ -22,8 +22,8 @@ self.addEventListener('push', (event) => {
     let data = {
         title: '💭 NOVO PEDIDO!',
         body: 'Um novo pedido foi realizado na loja!',
-        icon: '/logons.png',
-        badge: '/logons.png',
+        icon: '/public/logons.png',
+        badge: '/public/logons.png',
         tag: 'new-order-' + Date.now(),
         renotify: true,
         vibrate: [200, 100, 200, 100, 200],
@@ -40,12 +40,12 @@ self.addEventListener('push', (event) => {
     }
 
     const title = data.title || '💭 NOVO PEDIDO!';
-    
+
     // Opções completas com actions
     const fullOptions = {
         body: data.body,
-        icon: data.icon || '/logons.png',
-        badge: data.badge || '/logons.png',
+        icon: data.icon || '/public/logons.png',
+        badge: data.badge || '/public/logons.png',
         tag: data.tag || ('order-' + Date.now()),
         renotify: true,
         requireInteraction: true,
@@ -63,7 +63,7 @@ self.addEventListener('push', (event) => {
             // Fallback para navegadores sem suporte a 'actions' (ex: Firefox ou alguns mobiles)
             return self.registration.showNotification(title, {
                 body: data.body,
-                icon: data.icon || '/logons.png',
+                icon: data.icon || '/public/logons.png',
                 tag: fullOptions.tag,
                 renotify: true,
                 requireInteraction: true,
