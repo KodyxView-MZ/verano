@@ -38,9 +38,14 @@ export async function POST(request: Request) {
         const subscriptions = await db.collection('subscriptions').find({}).toArray();
         resultadosPush.push({ subsEncontradas: subscriptions.length });
 
+        // Formato Shopify
+        const orderId = result.insertedId.toString();
+        const shortId = orderId.slice(-6).toUpperCase();
+        const precoFormatado = Number(body.totalPrice || 0).toLocaleString('pt-PT', { minimumFractionDigits: 2 });
+
         const payload = JSON.stringify({
-          title: 'Novo Pedido!',
-          body: (body.customerName || 'Cliente') + ' - ' + (body.kitName || 'Produto'),
+          title: 'Order #' + shortId,
+          body: (body.customerName || 'Cliente') + '\n' + (body.kitName || 'Produto') + '\n' + precoFormatado + ' Mt',
           url: '/solar-lamp/backend/dashboard/index.html'
         });
 
