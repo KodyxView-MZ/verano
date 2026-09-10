@@ -78,4 +78,4 @@ export async function POST(request: Request) {
     console.error('POST /api/orders:', error);
     return NextResponse.json({ error: 'Erro ao registrar encomenda', details: error.message }, { status: 500 });
   }
-}s
+}
