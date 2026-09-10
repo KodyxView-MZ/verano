@@ -1,16 +1,6 @@
-﻿=import { NextResponse } from 'next/server';
+﻿import { NextResponse } from 'next/server';
 import getDb from '@/lib/db';
 import webpush from 'web-push';
-
-const vapidConfigurado = !!(process.env.VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY);
-
-if (vapidConfigurado) {
-  webpush.setVapidDetails(
-    process.env.VAPID_SUBJECT || 'mailto:admin@veranomz.com',
-    process.env.VAPID_PUBLIC_KEY!,
-    process.env.VAPID_PRIVATE_KEY!
-  );
-}
 
 export async function GET() {
   try {
@@ -19,6 +9,7 @@ export async function GET() {
     const orders = await db.collection('orders').find({}).sort({ _id: -1 }).toArray();
     return NextResponse.json({ orders });
   } catch (error) {
+    console.error('GET /api/orders:', error);
     return NextResponse.json({ error: 'Erro ao buscar pedidos' }, { status: 500 });
   }
 }
@@ -32,10 +23,18 @@ export async function POST(request: Request) {
 
     const resultadosPush: any[] = [];
 
+    const vapidConfigurado = !!(process.env.VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY);
+
     if (!vapidConfigurado) {
       resultadosPush.push({ erro: 'VAPID nao configurado' });
     } else {
       try {
+        webpush.setVapidDetails(
+          process.env.VAPID_SUBJECT || 'mailto:admin@veranomz.com',
+          process.env.VAPID_PUBLIC_KEY!,
+          process.env.VAPID_PRIVATE_KEY!
+        );
+
         const subscriptions = await db.collection('subscriptions').find({}).toArray();
         resultadosPush.push({ subsEncontradas: subscriptions.length });
 
@@ -76,6 +75,7 @@ export async function POST(request: Request) {
       pushResults: resultadosPush
     });
   } catch (error: any) {
-    return NextResponse.json({ error: 'Erro', details: error.message }, { status: 500 });
+    console.error('POST /api/orders:', error);
+    return NextResponse.json({ error: 'Erro ao registrar encomenda', details: error.message }, { status: 500 });
   }
-}
+}s
