@@ -187,13 +187,13 @@
             <!-- Preços Destacados -->
             <div class="mt-4 flex items-baseline gap-3">
                 <span class="text-3xl font-black text-emerald-600" id="main-product-price">3.800,00 Mt</span>
-                <span class="text-lg text-gray-400 line-through font-medium" id="main-product-old-price">6.600,00
+                <span class="text-lg text-red-500 line-through font-medium" id="main-product-old-price">6.600,00
                     Mt</span>
             </div>
 
             <!-- Etiqueta de Desconto -->
             <div
-                class="mt-2 inline-flex items-center gap-1 bg-emerald-600 text-white font-extrabold text-xs px-2.5 py-1 rounded-md uppercase tracking-wider shadow-sm">
+                class="mt-2 inline-flex items-center gap-1 bg-amber-500 text-white font-extrabold text-xs px-2.5 py-1 rounded-md uppercase tracking-wider shadow-sm">
                 <i data-lucide="tag" class="w-3.5 h-3.5"></i> SAVE 42%
             </div>
 
@@ -322,9 +322,9 @@
                     <span class="text-[11px] font-normal opacity-90">Pague na entrega</span>
                 </button>
 
-                <!-- Botão Falar no WhatsApp em VERMELHO com SVG verde e borda branca -->
+                <!-- Botão Encomendar pelo WhatsApp em VERMELHO com SVG verde e borda branca -->
                 <button onclick="sendWhatsAppOrder()"
-                    class="w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-4 px-6 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-md border-2 border-white/30">
+                    class="w-full bg-white hover:bg-green-50 text-green-600 font-extrabold py-4 px-6 rounded-xl flex items-center justify-center gap-2.5 transition-all shadow-md border-2 border-green-500">
                     <span class="whatsapp-icon whatsapp-icon-white-border" style="width:28px;height:28px;">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="12" cy="12" r="11.5" fill="#25D366" stroke="white" stroke-width="1.5" />
@@ -333,8 +333,26 @@
                                 fill="white" />
                         </svg>
                     </span>
-                    <span class="block text-base leading-tight">Falar no WhatsApp</span>
+                    <span class="block text-base leading-tight">Encomendar pelo WhatsApp</span>
                 </button>
+
+                <a href="tel:+258833333264" class="flex items-center gap-3 w-full bg-white border-2 border-blue-900 rounded-xl p-4 shadow-md hover:shadow-lg transition-all">
+                    <div class="w-12 h-12 rounded-full bg-blue-900 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                    </div>
+                    <div class="flex-1 text-left">
+                        <div class="font-extrabold text-blue-900 text-sm">Precisa de ajuda? Ligue agora (24h)</div>
+                        <div class="text-xs text-gray-600 flex items-center gap-1.5 mt-0.5">
+                            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                            Atendimento rapido - +258 83 333 3264
+                        </div>
+                    </div>
+                    <svg class="w-5 h-5 text-blue-900 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
 
             <hr class="my-6 border-gray-100" />
@@ -684,7 +702,7 @@
 
                         <!-- Botão WhatsApp no checkout em VERMELHO com SVG verde e borda branca -->
                         <button onclick="submitOrderWhatsApp()"
-                            class="w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-md border-2 border-white/30">
+                            class="w-full bg-white hover:bg-green-50 text-green-600 font-extrabold py-3.5 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-md border-2 border-green-500">
                             <span class="whatsapp-icon whatsapp-icon-white-border" style="width:20px;height:20px;">
                                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12" cy="12" r="11.5" fill="#25D366" stroke="white" stroke-width="1.5" />
@@ -993,7 +1011,7 @@
 
         // WHATSAPP DA PÃGINA PRINCIPAL (contacto directo sem encomenda)
         function sendWhatsAppOrder() {
-            const supportNumber = "258840000000";
+            const supportNumber = "258870293855";
             const baseMsg =
                 `Olá! Vi o anúncio da *Super Lâmpada LED Solar Pro* e gostaria de mais informações.`;
             window.open(`https://api.whatsapp.com/send?phone=${supportNumber}&text=${encodeURIComponent(baseMsg)}`,
