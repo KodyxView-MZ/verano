@@ -1,6 +1,6 @@
 ﻿import './globals.css';
 import type { Metadata } from 'next';
-import { FacebookPixel, PixelPageView } from 'next-pixels';
+import FacebookPixel from './components/FacebookPixel';
 
 export const metadata: Metadata = {
   title: 'Shopifyy',
@@ -16,8 +16,7 @@ export default function RootLayout({
     <html lang="pt">
       <body>
         {children}
-        <FacebookPixel pixelId={process.env.NEXT_PUBLIC_FB_PIXEL_ID!} />
-        <PixelPageView />
+        <FacebookPixel />
       </body>
     </html>
   );
