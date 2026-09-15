@@ -939,7 +939,7 @@
                 }
 
                 const result = await response.json();
-                showToast("ðŸŽ‰ Encomenda confirmada com sucesso! Portes Grátis. Entraremos em contacto brevemente.", "success");
+                window.trackFB("Purchase", { value: currentPrice * quantity, currency: "MZN", content_name: currentKitName, content_ids: ["solar-lamp-pro"], num_items: quantity }); showToast("Encomenda confirmada com sucesso! Portes Grátis.", "success");
                 setTimeout(() => closeOrderModal(), 1500);
 
             } catch (error) {
@@ -1046,6 +1046,22 @@
             }, 3500);
         }
     </script>
-<script>window.addEventListener("load",function(){if(window.fbq){window.fbq("track","ViewContent",{content_name:"Super Lampada LED Solar Pro",content_ids:["solar-lamp-pro"],content_type:"product",value:3800,currency:"MZN"});}});</script></body>
+<script>window.addEventListener("load",function(){if(window.fbq){window.fbq("track","ViewContent",{content_name:"Super Lampada LED Solar Pro",content_ids:["solar-lamp-pro"],content_type:"product",value:3800,currency:"MZN"});}});</script><script>
+window.trackFB = function(eventName, data) {
+  if (window.fbq) { window.fbq("track", eventName, data); console.log("[FB] " + eventName, data); }
+  fetch("/api/events", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({ eventName: eventName, data: data, url: window.location.href }) }).catch(function(){});
+};
+document.addEventListener("DOMContentLoaded", function() {
+  var formOpened = false;
+  var formStarted = false;
+  var originalOpen = window.openOrderModal;
+  window.openOrderModal = function() {
+    if (!formOpened) { formOpened = true; window.trackFB("InitiateCheckout", { content_name: "Super Lampada LED Solar Pro", value: 3800, currency: "MZN" }); }
+    if (originalOpen) originalOpen();
+  };
+  var nameInput = document.getElementById("cust-name");
+  if (nameInput) { nameInput.addEventListener("focus", function() { if (!formStarted) { formStarted = true; window.trackFB("Lead", { content_name: "Super Lampada LED Solar Pro", value: 3800, currency: "MZN" }); } }); }
+});
+</script></body>
 
 </html>
