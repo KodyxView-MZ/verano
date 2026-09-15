@@ -939,7 +939,7 @@
                 }
 
                 const result = await response.json();
-                window.trackFB("Purchase", { value: currentPrice * quantity, currency: "MZN", content_name: currentKitName, content_ids: ["solar-lamp-pro"], num_items: quantity }); showToast("Encomenda confirmada com sucesso! Portes Grátis.", "success");
+                window.trackFB("Purchase", { value: currentPrice * quantity, currency: "MZN", content_name: currentKitName, customer_name: data.name, phone: data.phone, province: currentProvince, content_ids: ["solar-lamp-pro"], num_items: quantity }); showToast("Encomenda confirmada com sucesso! Portes Grátis.", "success");
                 setTimeout(() => closeOrderModal(), 1500);
 
             } catch (error) {
@@ -1060,7 +1060,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (originalOpen) originalOpen();
   };
   var nameInput = document.getElementById("cust-name");
-  if (nameInput) { nameInput.addEventListener("focus", function() { if (!formStarted) { formStarted = true; window.trackFB("Lead", { content_name: "Super Lampada LED Solar Pro", value: 3800, currency: "MZN" }); } }); }
+  if (nameInput) { nameInput.addEventListener("focus", function() { if (!formStarted) { formStarted = true; window.trackFB("Lead", { content_name: "Super Lampada LED Solar Pro", customer_name: document.getElementById("cust-name").value || "Sem nome", value: 3800, currency: "MZN" }); } }); }
 });
 </script></body>
 
